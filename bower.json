@@ -5,7 +5,7 @@
   "authors": [
     "Chris Adams <chris@vibethink.com>"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "homepage": "https://github.com/chrisladams/leaflet-relational-map/",
   "ignore": [
     "**/.*",
