@@ -9,6 +9,19 @@
         <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
         <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css" />
         <link rel="stylesheet" href="relational-map.css" />
+
+        <style type="text/css">
+            .marker-cluster.users, .marker-cluster.users div {
+                background-color: rgba(0, 255, 0, 0.6);
+            }
+            .marker-cluster.places, .marker-cluster.places div, .marker-cluster.users.places {
+                background-color: rgba(255, 0, 0, 0.6);
+            }
+            .marker-cluster.users.places div {
+                background-color: rgba(0, 255, 0, 0.6);
+            }
+        </style>
+
     </head>
     <body>
 
@@ -52,6 +65,16 @@
                         ['40.7128','-74.0059']
                     ],
                     users: [2]
+                },
+                {
+                    id: 3,
+                    name: 'Seattle',
+                    link: 'https://www.google.com/?q=seattle',
+                    image: 'http://s2.evcdn.com/images/block/I0-001/028/627/965-2.jpeg_/seattle-professional-womens-salon-june-2016-65.jpeg',
+                    locations: [
+                        ['47.6062', -'122.3321']
+                    ],
+                    users: [2,3,4,5]
                 }
             ]);
             rm.addOjectType('users','#00ff00',[
@@ -84,7 +107,7 @@
                     locations: [
                         ['47.6062','-122.3321']
                     ],
-                    places: [1,2]
+                    places: [3]
                 },
                 {
                     id: 3,
@@ -94,7 +117,7 @@
                     locations: [
                         ['47.6854393','-122.2499612']
                     ],
-                    places: [0]
+                    places: [3]
                 },
                 {
                     id: 4,
@@ -104,7 +127,7 @@
                     locations: [
                         ['47.6131906','-122.3405593']
                     ],
-                    places: [0]
+                    places: [3]
                 },
                 {
                     id: 5,
@@ -114,7 +137,7 @@
                     locations: [
                         ['47.0032826','-123.6608172']
                     ],
-                    places: [0]
+                    places: [3]
                 }
             ]);
             rm.view_text = 'View More';

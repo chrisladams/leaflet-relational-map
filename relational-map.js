@@ -2,7 +2,7 @@ function relationalMap(map_id) {
 
 	// CHECK AND ALERT FOR DEPENDENCIES
 	if (typeof L === 'undefined') {
-	    console.log('Relational Map requires LeafletJS');
+	    console.log('Relational Map requires LeafletJS & Cluster Plugin');
 	}
 	if (typeof _ === 'undefined') {
 	    console.log('Relational Map requires Lodash');
@@ -42,7 +42,7 @@ function relationalMap(map_id) {
 		if (typeof L !== 'undefined' && typeof jQuery !== 'undefined') {
 			jQuery( "#" + that.map_id ).wrap( '<div class="relational-map-container"></div>' );
 			jQuery( "#" + that.map_id ).wrap( '<div class="relational-map-wrapper"></div>' );
-			that.map = L.map(that.map_id, { center: that.map_center, zoom: 5, scrollWheelZoom: false });
+			that.map = L.map(that.map_id, { center: that.map_center, zoom: 5, scrollWheelZoom: false, zoomAnimation: true, fadeAnimation: true });
 			L.tileLayer(that.map_tile, that.map_tile_params).addTo(that.map);
 			that.createMarkers();
 			if(withThumbnails !== undefined && withThumbnails){
@@ -113,7 +113,27 @@ function relationalMap(map_id) {
 		var bounds = [];
 		if(that.map_marker_layer !== null)
 			that.map_marker_layer.clearLayers();
-		that.map_marker_layer = new L.MarkerClusterGroup({ showCoverageOnHover: false });
+		that.map_marker_layer = new L.MarkerClusterGroup({ 
+			showCoverageOnHover: false,
+			iconCreateFunction: function(cluster) {
+				var childCount = cluster.getChildCount();
+				var children = cluster.getAllChildMarkers();
+
+				var types = _.map(children, function(m){ return m._markerKey; });
+				types = _.uniq(types);
+
+				var c = ' ' + types.join(' ');// + ' marker-cluster-small';
+				var cSize;
+				if (childCount < 10) {
+					cSize = new L.Point(40, 40);
+				} else if (childCount < 15) {
+					cSize = new L.Point(70, 70);
+				} else {
+					cSize = new L.Point(100, 100);
+				}
+				return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster' + c, iconSize: cSize });
+			}
+		});
 
 		if(markerObjects == undefined) {
 			markerObjects = jQuery.extend({}, that.objects_mapped);
