@@ -1,0 +1,81 @@
+.relational-map-wrapper {
+    position: relative;
+}
+.relational-map-wrapper .leaflet-container {
+    width: 100%;
+    height: 500px;
+}
+.relational-map-wrapper.pop-up-open {
+    padding-left: 300px;
+}
+.content-pop-out {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 280px;
+    text-align: center;
+    padding: 10px;
+}
+.content-pop-out-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 5px;
+}
+.popup-related {
+    list-style: none;
+    margin: 10px 0;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+}
+.popup-view-profile-link {
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.related-items-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.related-items-list.places {
+    background: #ccc;
+}
+.related-items-list.users {
+    background: #ddd;
+}
+
+.related-items-list li, .popup-related li {
+    margin: 5px;
+    padding: 0;
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    transition: all 0.5s;
+}
+
+.related-item.users, .popup-item.users {
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+}
+
+.related-items-list li.faded {
+    opacity: 0.3;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+img.rel-map-img {
+    max-width: 100%;
+}
+
+.popup-item.popup-selected {
+    width: 128px;
+    height: 128px;
+}
