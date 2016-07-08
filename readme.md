@@ -1,5 +1,9 @@
 # Leaflet Relational Map
 
+```sh
+$ bower install leaflet-relational-map
+```
+
 Dependencies:
 
   - jQuery ~2.2.4
