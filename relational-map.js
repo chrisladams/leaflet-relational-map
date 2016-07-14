@@ -214,7 +214,7 @@ function relationalMap(map_id) {
 		jQuery.each(obj.related, function(i,v){
 			relatedOutput += '<' + (that.useLists ? 'ul' : 'div') + ' class="popup-related '+i+'">';
 			jQuery.each(v, function(i2,v2){
-				relatedOutput += '<' + (that.useLists ? 'li' : 'div') + '><a class="popup-item '+i+'" href="'+v2.link+'">'+that.getObjectHtml(v2)+'</a></' + (that.useLists ? 'li' : 'div') + '>';
+				relatedOutput += '<' + (that.useLists ? 'li' : 'div') + ' class="popup-related-single"><a class="popup-item '+i+'" href="'+v2.link+'">'+that.getObjectHtml(v2)+'</a></' + (that.useLists ? 'li' : 'div') + '>';
 			});
 			relatedOutput += '</' + (that.useLists ? 'ul' : 'div') + '>';
 		});
