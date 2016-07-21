@@ -115,6 +115,7 @@ function relationalMap(map_id) {
 			that.map_marker_layer.clearLayers();
 		that.map_marker_layer = new L.MarkerClusterGroup({ 
 			showCoverageOnHover: false,
+			maxClusterRadius: 20,
 			iconCreateFunction: function(cluster) {
 				var childCount = cluster.getChildCount();
 				var children = cluster.getAllChildMarkers();
@@ -222,8 +223,8 @@ function relationalMap(map_id) {
 		mapWrap.find('.content-pop-out').remove();
 
 		var popOutClose = '<a href="#" class="content-pop-out-close">Close</a>';
-		var popOutContent = '<a class="popup-selected popup-item '+key+'" href="'+obj.link+'">'+that.getObjectHtml(obj)+'</a>'+
-			'<a class="popup-view-profile-link '+key+'" href="'+obj.link+'">'+that.view_text+'</a>';
+		var popOutContent = '<div class="popup-head"><a class="popup-selected popup-item '+key+'" href="'+obj.link+'">'+that.getObjectHtml(obj)+'</a>'+
+			'<a class="popup-view-profile-link '+key+'" href="'+obj.link+'">'+that.view_text+'</a></div>';
 
 		var popOutContent = jQuery('<div />', {
 			'class': 'content-pop-out'
