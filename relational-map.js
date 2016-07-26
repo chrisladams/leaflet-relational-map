@@ -77,15 +77,16 @@ function relationalMap(map_id) {
 	// CHECK MAP / MARKER BOUNDS
 	that.checkMarkersInBounds = function() {
 		that.map.on('moveend', function(e) {
-			jQuery.each(that.markers,function(i, m) {
-				var latLng = m.getLatLng();
-				var mapWrap = jQuery( "#" + that.map_id ).closest('.relational-map-container');
-				
-				if(that.inBounds(latLng.lat,latLng.lng)){
-					mapWrap.find('li.related-item[data-marker="'+i+'"]').removeClass('faded');
-				} else {
-					mapWrap.find('li.related-item[data-marker="'+i+'"]').addClass('faded');
-				}
+			var mapWrap = jQuery( "#" + that.map_id ).closest('.relational-map-container');
+			jQuery.each(that.objects_mapped,function(key, section) {
+				jQuery.each(section.objects,function(obj_key, obj) {
+					var locationInBounds = _.filter(obj.locations, function(location){ return that.inBounds(location[0],location[1]); });
+					if(locationInBounds.length > 0){
+						mapWrap.find('.related-item.' + key + '[data-id="'+obj.id+'"]').removeClass('faded');
+					} else {
+						mapWrap.find('.related-item.' + key + '[data-id="'+obj.id+'"]').addClass('faded');
+					}
+				});
 			});
 		});
 	}
@@ -204,6 +205,7 @@ function relationalMap(map_id) {
 		mapWrap.removeClass('pop-up-open');
 		mapWrap.find('.content-pop-out').remove();
 		that.createMarkers(that.objects_mapped);
+		that.map.invalidateSize();
 	}
 
 	that.openRelationalPopup = function(obj, key){
@@ -245,6 +247,8 @@ function relationalMap(map_id) {
 
 		that.createMarkers(relatedObjects);
 		jQuery('.content-pop-out-close').on('click',that.closeRelationalPopup);
+
+		that.map.invalidateSize();
 	}
 
 };
